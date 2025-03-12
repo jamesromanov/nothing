@@ -6,8 +6,8 @@ let connectDb = () => {
   try {
     mongoose
       .connect(
-        process.env.DATABESE.replace("<db_password>", process.env.PASSWORD) ||
-          process.env.DATABESE
+        process.env.DATABASE.replace("<db_password>", process.env.PASSWORD) ||
+          process.env.DATABASE
       )
       .then(() => {
         console.log("MongoDb connected succesfully!");
