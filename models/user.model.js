@@ -4,14 +4,13 @@ const validator = require("validator");
 let userSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: [true, "Name is required!"],
     minLength: 2,
     maxLength: 20,
+    required: [true, "Name is required!"],
   },
   email: {
     type: String,
-    required: [true, "Email is required!"],
-    validator: {
+    validate: {
       validator: (email) => {
         if (validator.isEmail(email)) {
           return true;
@@ -21,15 +20,15 @@ let userSchema = new mongoose.Schema({
       },
       message: "Please enter valid email!",
     },
+    required: [true, "Email is required!"],
   },
   password: {
     type: String,
-    required: true,
     minLength: 6,
     maxLength: 16,
     minLowercase: 1,
     minUppercase: 1,
-    validator: {
+    validate: {
       validator: (password) => {
         if (validator.isStrongPassword(password)) {
           return true;
@@ -39,6 +38,7 @@ let userSchema = new mongoose.Schema({
       },
       message: "Password must be strong password!",
     },
+    required: true,
   },
   role: {
     type: String,
@@ -47,7 +47,7 @@ let userSchema = new mongoose.Schema({
   },
   mobile: {
     type: String,
-    validator: {
+    validate: {
       validator: (number) => {
         const config = {
           countryCode: "+998",
@@ -85,9 +85,9 @@ let userSchema = new mongoose.Schema({
         };
         const cleanedValue = number.replace(/[-()\s]/g, "");
         if (
-          cleanedValue.length !== 12 ||
-          cleanedValue.startsWith("+998") ||
-          validMobileCodes.includes(cleanedValue.slice(4, 6))
+          cleanedValue.length !== 13 ||
+          !cleanedValue.startsWith("+998") ||
+          !config.validMobileCodes.includes(cleanedValue.slice(4, 6))
         ) {
           return false;
         }
