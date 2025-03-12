@@ -8,7 +8,8 @@ let bookSchema = new mongoose.Schema({
     required: [true, "Please enter the book's title!"],
     validate: {
       validator: (title) => {
-        if (title.replace(/[-()\s]/g, "")) {
+        let n = title.replace(/[-()\s!@><{}/|#]/g, "");
+        if (title.length !== n.length) {
           return false;
         } else {
           return true;
@@ -26,7 +27,8 @@ let bookSchema = new mongoose.Schema({
     maxLength: 20,
     validate: {
       validator: (author) => {
-        if (author.replace(/[-()\s]/g, "")) {
+        let n = author.replace(/[-()\s!@#]/g, "");
+        if (author.length !== n.length) {
           return false;
         } else {
           return true;
@@ -52,7 +54,7 @@ let bookSchema = new mongoose.Schema({
   status: {
     type: String,
     required: [true, "Please choose whether Available or Not Available"],
-    enum: ["Available", "Not available"],
+    enum: ["Available", "Not-available"],
   },
   quantity: { type: Number, required: [true, "Quantity must be provided"] },
 });
