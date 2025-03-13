@@ -1,4 +1,3 @@
-const { connection } = require("mongoose");
 const app = require("./middleware/app");
 const connectDb = require("./config/db");
 const env = require("dotenv").config();

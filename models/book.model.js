@@ -1,7 +1,5 @@
 const mongoose = require("mongoose");
-const { validate } = require("./user.model");
-const { MongoOIDCError } = require("mongodb");
-
+const validate = require("validator");
 let bookSchema = new mongoose.Schema({
   title: {
     type: String,

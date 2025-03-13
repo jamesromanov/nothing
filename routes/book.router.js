@@ -3,7 +3,6 @@ const booksController = require("../controller/books.controller");
 const booksRouter = express.Router();
 const path = require("path");
 const multer = require("multer");
-const { stdin } = require("process");
 let storage = multer.diskStorage({
   destination: "uploads/",
   filename: (req, file, cb) => {

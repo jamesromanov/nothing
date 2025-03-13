@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const { stripLow } = require("validator");
 
 let reqSchema = new mongoose.Schema({
   requestedBook: {

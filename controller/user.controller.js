@@ -1,6 +1,5 @@
 const { response } = require("../utils/response");
 const userModel = require("../models/user.model");
-const { AxiosError } = require("axios");
 
 let registerUser = async (req, res, next) => {
   try {
