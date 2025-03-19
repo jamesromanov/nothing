@@ -96,7 +96,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n     \"name\" : \"james\",\r\n     \"email\" : \"jamesromanov@gmail.com\",\r\n     \"role\" : \"admin\",\r\n     \"mobile\" : \"+998970477144\",\r\n     \"password\": \"Jamesromanov1:(\"\r\n}",
+					"raw": "{\r\n     \"name\" : \"sksknsdsks\",\r\n     \"email\" : \"sskakdma@gmail.com\",\r\n     \"role\" : \"admin\",\r\n     \"mobile\" : \"+998970477144\",\r\n     \"password\": \"Jamssdsnshsid1:(\"\r\n    \r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -112,6 +112,34 @@
 					"port": "3000",
 					"path": [
 						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "loginUser/Admin",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n     \"email\" : \"sskakdma@gmail.com\",\r\n     \"password\": \"Jamssdsnshsid1:(\"\r\n    \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"login"
 					]
 				}
 			},
