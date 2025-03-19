@@ -54,6 +54,7 @@ let bookSchema = new mongoose.Schema({
     required: [true, "Please choose whether Available or Not Available"],
     enum: ["Available", "Not-available"],
   },
+  users: { type: String, ref: "users" },
   quantity: { type: Number, required: [true, "Quantity must be provided"] },
 });
 

@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
 const env = require("dotenv").config();
 
-let connectDb = () => {
+let connectDb = async () => {
   try {
-    mongoose
+    await mongoose
       .connect(
         process.env.DATABASE.replace("<db_password>", process.env.PASSWORD) ||
           process.env.DATABASE

@@ -1,29 +1,41 @@
 const bookModel = require("../models/book.model");
+const { errorHandler } = require("../utils/errorHandler");
 const { response } = require("../utils/response");
-let addBooks = async (req, res, next) => {
-  try {
-    let { title, author, quantity, status, description, genre, image } =
-      req.body;
-    if (quantity <= 0) (status = "Not-available"), (quantity = 0);
-    else if (status == "Not-available") quantity = 0;
-    image = req.file.path;
+const Joi = require("joi");
 
-    let books = await bookModel.create({
-      title,
-      author,
-      quantity,
-      image,
-      description,
-      genre,
-      status,
-    });
-    response(res, { status: "Added!", books }, 201);
-  } catch (error) {
-    response(res, { message: error.message }, 501);
-  }
-};
+let addBooksValidator = Joi.object({
+  title: Joi.string().min(0).max(50),
+  author: Joi.string().min(4).max(20),
+  quantity: Joi.number().min(3).max(100),
+  image: Joi.string().min(3).max(20),
+  description: Joi.string().min(2).max(20),
+  genre: Joi.string().min(2).max(15),
+  status: Joi.string().min(2).max(20),
+  users: Joi.string(),
+});
+
+let addBooks = errorHandler(async (req, res, next) => {
+  let { title, author, quantity, status, description, genre, image, users } =
+    req.body;
+  if (quantity <= 0) (status = "Not-available"), (quantity = 0);
+  else if (status == "Not-available") quantity = 0;
+  image = req.file.path;
+  let data = await addBooksValidator.validate(req.body);
+  if (data.error) throw new Error("pls enter the title correctly!");
+  let books = await bookModel.create({
+    title,
+    author,
+    quantity,
+    image,
+    description,
+    genre,
+    status,
+    users,
+  });
+  response(res, { status: "Added!", books }, 201);
+});
 let getAllBooks = async (req, res, next) => {
-  let books = await bookModel.find();
+  let books = await bookModel.find().populate({ path: "users" });
   response(res, books);
 };
 let getBooksById = async (req, res, next) => {
